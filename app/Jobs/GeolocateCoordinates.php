@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Jobs;
 
+use App\Domain\Location\Contracts\GeocodingService;
+use App\Events\CoordinatesFetched;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -26,8 +28,10 @@ class GeolocateCoordinates implements ShouldQueue
         return $this->location;
     }
 
-    public function handle(): void
+    public function handle(GeocodingService $geocodingService): void
     {
+        $coordinates = $geocodingService->geocodeLocation($this->location);
 
+        CoordinatesFetched::dispatch($this->location, $coordinates);
     }
 }
