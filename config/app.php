@@ -199,6 +199,7 @@ return [
         App\Providers\Libs\OpenWeatherMap\GeocodingClientProvider::class,
         App\Providers\Libs\OpenWeatherMap\WeatherClientProvider::class,
         App\Providers\Domain\Weather\WeatherResolverProvider::class,
+        App\Providers\Libs\Whatagraph\WhatagraphClientProvider::class,
     ],
 
     /*
