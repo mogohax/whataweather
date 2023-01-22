@@ -197,7 +197,8 @@ return [
 
         App\Providers\Domain\Location\GeocodingServiceProvider::class,
         App\Providers\Libs\OpenWeatherMap\GeocodingClientProvider::class,
-        App\Providers\Libs\OpenWeatherMap\WeatherClientProvider::class
+        App\Providers\Libs\OpenWeatherMap\WeatherClientProvider::class,
+        App\Providers\Domain\Weather\WeatherResolverProvider::class,
     ],
 
     /*
