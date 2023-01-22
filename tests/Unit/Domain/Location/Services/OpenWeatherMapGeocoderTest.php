@@ -10,6 +10,7 @@ use App\Libs\OpenWeatherMap\Clients\GeocodingClient;
 use App\Libs\OpenWeatherMap\Exceptions\OpenWeatherMapClientException;
 use App\Libs\OpenWeatherMap\Responses\GeocodingResponse;
 use PHPUnit\Framework\MockObject\MockObject;
+use Psr\Log\NullLogger;
 use Tests\TestCase;
 
 class OpenWeatherMapGeocoderTest extends TestCase
@@ -21,7 +22,7 @@ class OpenWeatherMapGeocoderTest extends TestCase
     {
         $this->geocodingClient = $this->createMock(GeocodingClient::class);
 
-        $this->service = new OpenWeatherMapGeocoder($this->geocodingClient);
+        $this->service = new OpenWeatherMapGeocoder($this->geocodingClient, new NullLogger());
 
         parent::setUp();
     }

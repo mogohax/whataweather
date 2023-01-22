@@ -11,6 +11,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Psr\Log\LoggerInterface;
 
 class GeolocateCoordinates implements ShouldQueue
 {
@@ -28,9 +29,11 @@ class GeolocateCoordinates implements ShouldQueue
         return $this->location;
     }
 
-    public function handle(GeocodingService $geocodingService): void
+    public function handle(GeocodingService $geocodingService, LoggerInterface $logger): void
     {
         $coordinates = $geocodingService->geocodeLocation($this->location);
+
+        $logger->debug("Got coordinates for {$this->location}: lat:{$coordinates->latitude} lon:{$coordinates->longitude}");
 
         CoordinatesFetched::dispatch($this->location, $coordinates);
     }
