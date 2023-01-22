@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Events\CoordinatesFetched;
+use App\Events\WeatherFetched;
 use App\Listeners\FetchWeatherByCoordinates;
+use App\Listeners\PushWeatherToWhatagraph;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -16,6 +18,10 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         CoordinatesFetched::class => [
             FetchWeatherByCoordinates::class,
+        ],
+
+        WeatherFetched::class => [
+            PushWeatherToWhatagraph::class,
         ],
     ];
 
