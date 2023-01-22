@@ -47,5 +47,47 @@ return [
                 ],
             ],
         ],
+        'weather' => [
+            'description' => [
+                'baseUrl' => 'https://api.openweathermap.org/data/2.5/',
+                'operations' => [
+                    'oneCall' => [
+                        'httpMethod' => 'GET',
+                        'uri' => 'onecall',
+                        'responseClass' => 'WeatherResponse',
+                        'parameters' => [
+                            'lat' => [
+                                'type' => 'numeric',
+                                'location' => 'query',
+                            ],
+                            'lon' => [
+                                'type' => 'numeric',
+                                'location' => 'query',
+                            ],
+                            'exclude' => [
+                                'type' => 'string',
+                                'location' => 'query',
+                            ],
+                            'units' => [
+                                'type' => 'string',
+                                'location' => 'query',
+                            ],
+                        ],
+                        'additionalParameters' => [
+                            'location' => 'query',
+                        ],
+                    ],
+                ],
+                'models' => [
+                    'WeatherResponse' => [
+                        'type' => 'object',
+                        'location' => 'json',
+                        'additionalProperties' => [
+                            'location' => 'json'
+                        ],
+                    ],
+                ],
+            ],
+        ]
     ],
 ];
